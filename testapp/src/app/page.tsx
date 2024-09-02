@@ -1,72 +1,35 @@
-"use client";
+import Link from 'next/link'
 
-import { useState } from 'react';
-
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-
-    try {
-      // Your login logic here
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        // Handle successful login
-        console.log('Login successful!');
-      } else {
-        const data = await response.json();
-        setError(data.message);
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setError('An error occurred during login.');
-    }
-  };
-
+const LoginForm = () => {
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <h2>Нэвтрэх</h2>
-        {error && <div className="error">{error}</div>}
-        <div>
-          <label htmlFor="email">И-мэйл хаяг:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Нууц үг:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Нэвтрэх</button>
-      </form>
-      <div className="links">
-        <a href="/register">Бүртгүүлэх</a>
-        <a href="/forgot-password">Нууц үгээ мартсан уу?</a>
+    <main className="bg-pageBg">
+      <div className="w-full h-screen flex justify-end items-center bg-black bg-opacity-25 px-40">
+        <div className='bg-logo'></div>
+        <aside className="bg-white w-full max-w-md rounded-xl shadow-lg shadow-black">
+        <h1 className="text-black px-6 text-4xl rounded-t-xl m-0 py-4 mt-10">Нэвтрэх хэсэг</h1>
+        <form className="p-6">
+          <input type="text" placeholder="Нэр эсвэл мэйл хаягаа оруулна уу?" className="bg-black bg-opacity-10 py-3 px-4 w-full text-black text-md font-light outline-none"></input>
+          <input type="password" placeholder="Нууц үгээ оруулна уу?" className="bg-black bg-opacity-10 py-3 px-4 w-full text-black text-md font-light outline-none mt-3"></input>
+          
+          <div className="flex items-center mt-3">
+            <input type="checkbox" id="rememberMe"/>
+            <label htmlFor="rememberMe" className="ml-2">Намайг сана</label>
+          </div>
+          
+          <div className="mt-3">
+            <a href="" className="text-blue opacity-75">Нууц үгээ мартсан уу?</a>
+          </div>
+
+          <div className="flex mt-5 justify-between items-center mb-5">
+            <Link href="signup" className="bg-green text-black font-medium py-2 px-8 transition hover:text-white">Бүртгүүлэх</Link>
+            <Link href="dashboard"><button type="submit" className="bg-green text-black font-medium py-2 px-8 transition hover:text-white">Нэвтрэх</button></Link>
+          </div>
+        </form>
+
+        </aside>
       </div>
-    </div>
+    </main>
   );
 };
 
-export default Login;
+export default LoginForm;

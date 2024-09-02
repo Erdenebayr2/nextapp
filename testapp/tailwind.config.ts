@@ -1,3 +1,4 @@
+import { Black_And_White_Picture } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,10 +9,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        white:'#fff',
+        black:'#313131',
+        yellow:'#fdd201',
+        green:'#00FF00',
+        blue:'#0000FF',
+        purple:'#800080',
+      },
+      logo:{
+        blogo: "url('/images/logo.png')",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        pageBg: "url('/images/bg.png')",
       },
     },
   },
